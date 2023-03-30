@@ -1,5 +1,28 @@
 import styled, { css } from "styled-components";
 
+export const PageSupport = styled.div`
+    height: 100vh;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    h2 {
+        color: #eee;
+    }
+
+    p {
+        color: #aaa;
+    }
+
+    a {
+        color: #d1fe49;
+        text-decoration: underline;
+    }
+`
+
 export const PageLayout = styled.div`
     height: 100vh;
     padding-top: 20px;

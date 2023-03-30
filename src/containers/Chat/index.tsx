@@ -28,6 +28,7 @@ function ChatPage() {
         transcript,
         listening,
         resetTranscript,
+        browserSupportsSpeechRecognition
     } = useSpeechRecognition();
 
     useEffect(() => {
@@ -86,6 +87,17 @@ function ChatPage() {
         speechSynthesis.lang = 'en-US';
 
         window.speechSynthesis.speak(speechSynthesis);
+    }
+
+    if (!browserSupportsSpeechRecognition) {
+        return (
+            <>
+                <S.PageSupport>
+                    <h2>This browser does not support: Speech Recognition</h2>
+                    <p>See more about at: <a href="https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition#browser_compatibility">https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition#browser_compatibility</a> </p>
+                </S.PageSupport>
+            </>
+        )
     }
 
     return (
