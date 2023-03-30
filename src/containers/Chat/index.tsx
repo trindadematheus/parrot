@@ -21,6 +21,7 @@ function ChatPage() {
     const [messages, setMessages] = useState<Message[]>([])
     const [voiceText, setVoiceText] = useState('')
     const [chatTopic, setChatTopic] = useState('Sports')
+    const [hasSupport, setHasSupport] = useState(false)
 
     const endChatRef = useRef(null)
 
@@ -30,6 +31,10 @@ function ChatPage() {
         resetTranscript,
         browserSupportsSpeechRecognition
     } = useSpeechRecognition();
+
+    useEffect(() => {
+        setHasSupport(browserSupportsSpeechRecognition)
+    }, [])
 
     useEffect(() => {
         setVoiceText(transcript)
@@ -68,7 +73,9 @@ function ChatPage() {
                 text: data.choices[0].text
             }])
         } catch (error) {
-            toast.error('Error sending message, try again.')
+            if (error.response.status !== 401) {
+                toast.error('Error sending message, try again.')
+            }
         } finally {
             setIsLoading(false)
         }
@@ -89,7 +96,7 @@ function ChatPage() {
         window.speechSynthesis.speak(speechSynthesis);
     }
 
-    if (!browserSupportsSpeechRecognition) {
+    if (!hasSupport) {
         return (
             <>
                 <S.PageSupport>
@@ -132,7 +139,7 @@ function ChatPage() {
                         {isLoading && (
                             <S.MessageItem key='loading-message' author={"gpt"} >
                                 <div className="message-header">
-                                    <p className="message-author">{"gpt"}</p>
+                                    <p className="message-author">gpt</p>
                                 </div>
 
                                 <p className="message-text">

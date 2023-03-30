@@ -14,7 +14,7 @@ api.interceptors.response.use((response) => {
 }, (error) => {
   if (error.response.status === 401) {
     nookies.destroy(null, 'parrot_token_openai')
-    window.location.reload()
+    window.location.href = '/auth?invalid=true'
   }
 
   return Promise.reject(error)

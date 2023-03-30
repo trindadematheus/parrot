@@ -9,9 +9,9 @@ import { GlobalStyle } from '../styles/global'
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
-    <Head>
-      <title>Parrot: Practice your english by talking</title>
-    </Head>
+      <Head>
+        <title>Parrot: Practice your english by talking</title>
+      </Head>
 
       <Component {...pageProps} />
 
