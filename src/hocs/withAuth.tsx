@@ -5,11 +5,11 @@ export function withAuth(gssp: GetServerSideProps) {
     return async (ctx: GetServerSidePropsContext) => {
         const cookies = nookies.get(ctx)
 
-        if (!cookies.pwm_token_openai) {
+        if (!cookies.parrot_token_openai) {
             return {
                 redirect: {
                     permanent: false,
-                    destination: `/auth?cbpage=${ctx.resolvedUrl}`
+                    destination: `/auth`
                 }
             }
         }
